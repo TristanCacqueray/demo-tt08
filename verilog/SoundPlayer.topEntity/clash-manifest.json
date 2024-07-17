@@ -1,0 +1,78 @@
+{
+    "components": [
+        "topEntity"
+    ],
+    "dependencies": {
+        "transitive": []
+    },
+    "domains": {
+        "AudioDom": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 22675736,
+            "reset_kind": "Asynchronous",
+            "reset_polarity": "ActiveHigh"
+        },
+        "IntelSystem": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 10000,
+            "reset_kind": "Asynchronous",
+            "reset_polarity": "ActiveHigh"
+        },
+        "System": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 10000,
+            "reset_kind": "Asynchronous",
+            "reset_polarity": "ActiveHigh"
+        },
+        "XilinxSystem": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 10000,
+            "reset_kind": "Synchronous",
+            "reset_polarity": "ActiveHigh"
+        }
+    },
+    "files": [
+        {
+            "name": "topEntity_shim.cpp",
+            "sha256": "460702d8afc7479b65dad3acb826f56baf7e34f11fea519fb6f597a0c8340150"
+        },
+        {
+            "name": "topEntity.sdc",
+            "sha256": "b7ac4709e64245883e481cde37606fcdd1d89bb434a588eb49f5071a41e0e740"
+        },
+        {
+            "name": "topEntity.v",
+            "sha256": "9ae8fb887973802d1eddaa148ce1b5aa78d51fa99670f6a03695d73e4f1d0c58"
+        }
+    ],
+    "flags": [
+        20,
+        20
+    ],
+    "hash": "7af68192527aa14ba1517aac15c03ab13254d6a8f81dec3b7946b014da399482",
+    "top_component": {
+        "name": "topEntity",
+        "ports_flat": [
+            {
+                "direction": "in",
+                "domain": "AudioDom",
+                "is_clock": true,
+                "name": "CLK",
+                "type_name": "",
+                "width": 1
+            },
+            {
+                "direction": "out",
+                "is_clock": false,
+                "name": "OUT",
+                "type_name": "signed [7:0]",
+                "width": 8
+            }
+        ]
+    },
+    "version": "unstable"
+}
