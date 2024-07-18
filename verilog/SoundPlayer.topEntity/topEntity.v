@@ -12,17 +12,18 @@ module topEntity
     , output wire signed [7:0] OUT
     );
   wire  c$bindCsr;
-  // SoundPlayer.hs:112:1-9
+  // SoundPlayer.hs:124:1-9
   reg [15:0] r = 16'd0;
-  reg signed [6:0] c$app_arg;
+  wire signed [31:0] c$app_arg;
   wire signed [31:0] c$app_arg_0;
-  wire signed [31:0] c$case_alt;
   wire signed [63:0] c$app_arg_1;
+  wire signed [63:0] result;
+  wire signed [31:0] c$sawOsc_$jOut_app_arg;
+  wire signed [31:0] c$sawOsc_$jOut_case_alt;
   wire [16:0] z;
-  wire [15:0] result;
-  wire signed [6:0] c$app_arg_selection_res;
-  wire signed [31:0] c$s;
-  wire signed [7:0] c$s_0;
+  wire [15:0] result_0;
+  wire signed [31:0] c$dividend;
+  wire signed [31:0] c$dividend_0;
 
   // resetGen begin
   // pragma translate_off
@@ -69,98 +70,60 @@ module topEntity
     if ( c$bindCsr) begin
       r <= 16'd0;
     end else begin
-      r <= result;
+      r <= result_0;
     end
   end
   // register end
 
-  assign c$s = (($signed(c$app_arg_1[0+:32])) * c$app_arg_0);
+  assign OUT = $signed(result[0+:8]);
 
-  assign c$s_0 = ($signed({c$s[32-1],c$s[0+:(8-1)]}));
+  assign c$dividend = (c$app_arg_0 * 32'sd255);
 
-  assign c$app_arg_selection_res = $signed({c$s_0[8-1],c$s_0[0+:(7-1)]});
+  // divSigned begin
+  wire resultPos;
+  wire dividerNeg;
+  wire signed [32:0] dividend2;
+  wire signed [32:0] dividendE;
+  wire signed [32:0] dividerE;
+  wire signed [32:0] quot_res;
 
-  always @(*) begin
-    case(c$app_arg_selection_res)
-      7'sd0 : c$app_arg = 7'sd1;
-      7'sd1 : c$app_arg = 7'sd4;
-      7'sd2 : c$app_arg = 7'sd7;
-      7'sd3 : c$app_arg = 7'sd10;
-      7'sd4 : c$app_arg = 7'sd13;
-      7'sd5 : c$app_arg = 7'sd16;
-      7'sd6 : c$app_arg = 7'sd19;
-      7'sd7 : c$app_arg = 7'sd23;
-      7'sd8 : c$app_arg = 7'sd26;
-      7'sd9 : c$app_arg = 7'sd29;
-      7'sd10 : c$app_arg = 7'sd32;
-      7'sd11 : c$app_arg = 7'sd35;
-      7'sd12 : c$app_arg = 7'sd38;
-      7'sd13 : c$app_arg = 7'sd41;
-      7'sd14 : c$app_arg = 7'sd44;
-      7'sd15 : c$app_arg = 7'sd47;
-      7'sd16 : c$app_arg = 7'sd49;
-      7'sd17 : c$app_arg = 7'sd52;
-      7'sd18 : c$app_arg = 7'sd55;
-      7'sd19 : c$app_arg = 7'sd58;
-      7'sd20 : c$app_arg = 7'sd61;
-      7'sd21 : c$app_arg = 7'sd63;
-      7'sd22 : c$app_arg = 7'sd66;
-      7'sd23 : c$app_arg = 7'sd69;
-      7'sd24 : c$app_arg = 7'sd71;
-      7'sd25 : c$app_arg = 7'sd74;
-      7'sd26 : c$app_arg = 7'sd77;
-      7'sd27 : c$app_arg = 7'sd79;
-      7'sd28 : c$app_arg = 7'sd81;
-      7'sd29 : c$app_arg = 7'sd84;
-      7'sd30 : c$app_arg = 7'sd86;
-      7'sd31 : c$app_arg = 7'sd88;
-      7'sd32 : c$app_arg = 7'sd91;
-      7'sd33 : c$app_arg = 7'sd93;
-      7'sd34 : c$app_arg = 7'sd95;
-      7'sd35 : c$app_arg = 7'sd97;
-      7'sd36 : c$app_arg = 7'sd99;
-      7'sd37 : c$app_arg = 7'sd101;
-      7'sd38 : c$app_arg = 7'sd103;
-      7'sd39 : c$app_arg = 7'sd105;
-      7'sd40 : c$app_arg = 7'sd106;
-      7'sd41 : c$app_arg = 7'sd108;
-      7'sd42 : c$app_arg = 7'sd110;
-      7'sd43 : c$app_arg = 7'sd111;
-      7'sd44 : c$app_arg = 7'sd113;
-      7'sd45 : c$app_arg = 7'sd114;
-      7'sd46 : c$app_arg = 7'sd115;
-      7'sd47 : c$app_arg = 7'sd117;
-      7'sd48 : c$app_arg = 7'sd118;
-      7'sd49 : c$app_arg = 7'sd119;
-      7'sd50 : c$app_arg = 7'sd120;
-      7'sd51 : c$app_arg = 7'sd121;
-      7'sd52 : c$app_arg = 7'sd122;
-      7'sd53 : c$app_arg = 7'sd123;
-      7'sd54 : c$app_arg = 7'sd124;
-      7'sd55 : c$app_arg = 7'sd124;
-      7'sd56 : c$app_arg = 7'sd125;
-      7'sd57 : c$app_arg = 7'sd125;
-      7'sd58 : c$app_arg = 7'sd126;
-      7'sd59 : c$app_arg = 7'sd126;
-      7'sd60 : c$app_arg = 7'sd127;
-      7'sd61 : c$app_arg = 7'sd127;
-      7'sd62 : c$app_arg = 7'sd127;
-      7'sd63 : c$app_arg = 7'sd127;
-      default : c$app_arg = {7 {1'bx}};
-    endcase
-  end
+  assign resultPos = c$dividend[32-1] == c$sawOsc_$jOut_app_arg[32-1];
+  assign dividerNeg = c$sawOsc_$jOut_app_arg[32-1] == 1'b1;
+  assign dividendE = $signed({{c$dividend[32-1]},c$dividend});  // sign extension
+  assign dividerE = $signed({{c$sawOsc_$jOut_app_arg[32-1]} ,c$sawOsc_$jOut_app_arg} );  // sign extension
 
-  assign c$app_arg_0 = (r > 16'd20000) ? 32'sd500 : c$case_alt;
+  assign dividend2 = resultPos ? dividendE
+                           : (dividerNeg ? (dividendE - dividerE - 32'sd1)
+                                      : (dividendE - dividerE + 32'sd1));
 
-  assign c$case_alt = (r > 16'd12000) ? 32'sd480 : 32'sd440;
+  assign quot_res = dividend2 / dividerE;
+  assign c$app_arg = $signed(quot_res[32-1:0]);
+  // divSigned end
+
+  assign c$dividend_0 = ($signed(c$app_arg_1[0+:32]));
+
+  // modSigned begin
+  // remainder
+  wire signed [31:0] rem_res;
+  assign rem_res = c$dividend_0 % c$sawOsc_$jOut_app_arg;
+
+  // modulo
+  assign c$app_arg_0 = (c$dividend_0[32-1] == c$sawOsc_$jOut_app_arg[32-1]) ?
+                   rem_res :
+                   (rem_res == 32'sd0 ? 32'sd0 : rem_res + c$sawOsc_$jOut_app_arg);
+  // modSigned end
 
   assign c$app_arg_1 = $unsigned({{(64-16) {1'b0}},r});
 
-  assign OUT = $signed({{(8-7) {c$app_arg[7-1]}},c$app_arg});
+  assign result = $signed({{(64-32) {1'b0}},c$app_arg});
+
+  assign c$sawOsc_$jOut_app_arg = (r > 16'd20000) ? 32'sd88 : c$sawOsc_$jOut_case_alt;
+
+  assign c$sawOsc_$jOut_case_alt = (r > 16'd12000) ? 32'sd91 : 32'sd100;
 
   assign z = r + 16'd1;
 
-  assign result = (z > 17'd44099) ? 16'd0 : (z[0+:16]);
+  assign result_0 = (z > 17'd44099) ? 16'd0 : (z[0+:16]);
 
 
 endmodule

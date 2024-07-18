@@ -9,12 +9,24 @@ import RetroClash.Utils (succIdx, withResetEnableGen)
 -- | Setup the global clock
 createDomain vSystem{vName = "AudioDom", vPeriod = hzToPeriod 44100}
 
--- | Sound position for a 44100 length
+-- | Sound position in a 1 second demo at 44100 Hz
 type SoundPos = Index 44100
 
+sawOsc :: SoundPos -> Signed 8
+sawOsc pos = fromIntegral val
+  where
+    val, pitch, period :: Signed 32
+    val = (fromIntegral pos `mod` period) * 255 `div` period
+    period = 44100 `div` pitch
+    pitch
+        | pos > 20_000 = 500
+        | pos > 12_000 = 480
+        | otherwise = 440
+
+
 -- | Produce a sample for the given position in the sound
-posToSample :: SoundPos -> Signed 8
-posToSample pos = mySin $ resize val
+sinOsc :: SoundPos -> Signed 8
+sinOsc pos = mySin $ resize val
   where
     val = fromIntegral pos * pitch
     pitch :: Signed 32
@@ -109,7 +121,7 @@ rawSin 63 = 127
 -- | Generate the samples by keeping track of the position
 -- TODO: handle clock division, instead of hardcoding 'AudioDom'
 playSound :: (HiddenClockResetEnable AudioDom) => Signal AudioDom (Signed 8)
-playSound = posToSample <$> r
+playSound = sawOsc <$> r
   where
     -- | Increment the position
     r :: Signal AudioDom SoundPos
